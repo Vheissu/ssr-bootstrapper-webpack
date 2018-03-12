@@ -3,5 +3,5 @@ export default function (configure: any): {
         PLATFORM: any;
     };
     stop: () => void;
-    start: () => Promise<{}>;
+    start: (headers?: any) => Promise<{}>;
 };

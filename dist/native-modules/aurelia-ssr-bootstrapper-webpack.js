@@ -21,7 +21,7 @@ function initialize() {
         PLATFORM: PLATFORM,
     };
 }
-function start(configure) {
+function start(configure, headers) {
     var aurelia = new Aurelia(new WebpackLoader());
     aurelia.host = pal.DOM.querySelectorAll('body')[0];
     var attribute = pal.DOM.createAttribute('aurelia-app');
@@ -36,7 +36,7 @@ function start(configure) {
                 resolve({ aurelia: aurelia, pal: pal, palNodeJS: palNodeJS, stop: stop });
             }, 20);
         });
-        return configure(aurelia);
+        return configure(aurelia, headers);
     });
 }
 function stop() {
@@ -47,8 +47,8 @@ export default function (configure) {
     return {
         initialize: initialize,
         stop: stop,
-        start: function () {
-            return start(configure);
+        start: function (headers) {
+            return start(configure, headers);
         }
     };
 }

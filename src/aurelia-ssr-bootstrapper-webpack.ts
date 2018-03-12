@@ -28,7 +28,7 @@ function initialize() {
   };
 }
 
-function start(configure: any) {
+function start(configure: any, headers?: any) {
   const aurelia = new Aurelia(new WebpackLoader());
 
   aurelia.host = pal.DOM.querySelectorAll('body')[0];
@@ -47,7 +47,7 @@ function start(configure: any) {
       }, 20);
     });
 
-    return configure(aurelia);
+    return configure(aurelia, headers);
   });
 }
 
@@ -56,12 +56,12 @@ function stop() {
   require('aurelia-pal-nodejs').reset(pal.DOM.global.window);
 }
 
-export default function (configure: any) {
+export default function(configure: any) {
   return {
     initialize,
     stop,
-    start: function() {
-      return start(configure);
+    start: function(headers?: any) {
+      return start(configure, headers);
     }
   };
 };

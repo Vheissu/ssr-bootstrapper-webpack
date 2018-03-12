@@ -10,7 +10,7 @@ System.register(["aurelia-framework", "aurelia-loader-webpack", "aurelia-binding
             PLATFORM: PLATFORM,
         };
     }
-    function start(configure) {
+    function start(configure, headers) {
         var aurelia = new aurelia_framework_1.Aurelia(new aurelia_loader_webpack_1.WebpackLoader());
         aurelia.host = pal.DOM.querySelectorAll('body')[0];
         var attribute = pal.DOM.createAttribute('aurelia-app');
@@ -25,7 +25,7 @@ System.register(["aurelia-framework", "aurelia-loader-webpack", "aurelia-binding
                     resolve({ aurelia: aurelia, pal: pal, palNodeJS: palNodeJS, stop: stop });
                 }, 20);
             });
-            return configure(aurelia);
+            return configure(aurelia, headers);
         });
     }
     function stop() {
@@ -36,8 +36,8 @@ System.register(["aurelia-framework", "aurelia-loader-webpack", "aurelia-binding
         return {
             initialize: initialize,
             stop: stop,
-            start: function () {
-                return start(configure);
+            start: function (headers) {
+                return start(configure, headers);
             }
         };
     }
