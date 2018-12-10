@@ -28,14 +28,9 @@ function start(configure, headers) {
     attribute.value = 'main';
     aurelia.host.attributes.setNamedItem(attribute);
     return new Promise(resolve => {
-        // we need to wait for aurelia-composed as otherwise
-        // the router hasn't been fully initialized and 
-        // generated routes by route-href will be undefined
-        pal.DOM.global.window.addEventListener('aurelia-composed', () => {
-            setTimeout(() => {
-                resolve({ aurelia, pal, palNodeJS, stop });
-            }, 20);
-        });
+        setTimeout(() => {
+            resolve({ aurelia, pal, palNodeJS, stop });
+        }, 20);
         return configure(aurelia, headers);
     });
 }

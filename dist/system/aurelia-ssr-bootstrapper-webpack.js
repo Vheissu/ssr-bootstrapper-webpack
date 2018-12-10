@@ -1,5 +1,6 @@
 System.register(["aurelia-framework", "aurelia-loader-webpack", "aurelia-binding"], function (exports_1, context_1) {
     "use strict";
+    var aurelia_framework_1, aurelia_loader_webpack_1, aurelia_binding_1, palNodeJS, pal;
     var __moduleName = context_1 && context_1.id;
     function initialize() {
         var initialize = palNodeJS.initialize;
@@ -17,14 +18,9 @@ System.register(["aurelia-framework", "aurelia-loader-webpack", "aurelia-binding
         attribute.value = 'main';
         aurelia.host.attributes.setNamedItem(attribute);
         return new Promise(function (resolve) {
-            // we need to wait for aurelia-composed as otherwise
-            // the router hasn't been fully initialized and 
-            // generated routes by route-href will be undefined
-            pal.DOM.global.window.addEventListener('aurelia-composed', function () {
-                setTimeout(function () {
-                    resolve({ aurelia: aurelia, pal: pal, palNodeJS: palNodeJS, stop: stop });
-                }, 20);
-            });
+            setTimeout(function () {
+                resolve({ aurelia: aurelia, pal: pal, palNodeJS: palNodeJS, stop: stop });
+            }, 20);
             return configure(aurelia, headers);
         });
     }
@@ -42,7 +38,6 @@ System.register(["aurelia-framework", "aurelia-loader-webpack", "aurelia-binding
         };
     }
     exports_1("default", default_1);
-    var aurelia_framework_1, aurelia_loader_webpack_1, aurelia_binding_1, palNodeJS, pal;
     return {
         setters: [
             function (aurelia_framework_1_1) {
